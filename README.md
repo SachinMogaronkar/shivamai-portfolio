@@ -350,52 +350,6 @@ The portfolio includes a backend-powered contact form.
 
 ---
 
-# 📸 Application Screenshots
-
-Screenshots can be added to the repository under:
-
-```text
-screenshots/
-```
-
-Suggested screenshots:
-
-### 🏠 Home Page
-
-![Portfolio Home](./screenshots/home.png)
-
----
-
-### 👨‍💻 About Page
-
-![About Page](./screenshots/about.png)
-
----
-
-### 🚀 Projects Page
-
-![Projects Page](./screenshots/projects.png)
-
----
-
-### 💼 Experience Page
-
-![Experience Page](./screenshots/experience.png)
-
----
-
-### 📊 LeetCode Dashboard
-
-![LeetCode Dashboard](./screenshots/leetcode.png)
-
----
-
-### 📬 Contact Page
-
-![Contact Page](./screenshots/contact.png)
-
----
-
 # ☁️ Deployment Architecture
 
 | Layer | Platform |
