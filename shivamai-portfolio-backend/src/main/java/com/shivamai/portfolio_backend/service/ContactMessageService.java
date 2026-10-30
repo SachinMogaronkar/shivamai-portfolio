@@ -1,21 +1,21 @@
 
 package com.shivamai.portfolio_backend.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shivamai.portfolio_backend.dto.ContactRequest;
 import com.shivamai.portfolio_backend.entity.ContactMessage;
 import com.shivamai.portfolio_backend.repository.ContactMessageRepository;
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
 
-import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.MailException;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,23 +24,39 @@ public class ContactMessageService {
     private static final Logger log =
             LoggerFactory.getLogger(ContactMessageService.class);
 
+    private static final String BREVO_API_URL =
+            "https://api.brevo.com/v3/smtp/email";
+
     private final ContactMessageRepository contactMessageRepository;
-    private final JavaMailSender mailSender;
+    private final ObjectMapper objectMapper;
+    private final HttpClient httpClient;
 
-    @Value("${app.contact.recipient:}")
+    @Value("${BREVO_API_KEY:}")
+    private String brevoApiKey;
+
+    @Value("${BREVO_SENDER_EMAIL:}")
+    private String senderEmail;
+
+    @Value("${BREVO_SENDER_NAME:ShivaMai Systems}")
+    private String senderName;
+
+    @Value("${CONTACT_RECIPIENT:}")
     private String recipient;
-
-    @Value("${spring.mail.username:}")
-    private String sender;
 
     public ContactMessageService(
             ContactMessageRepository contactMessageRepository,
-            @Nullable JavaMailSender mailSender) {
+            ObjectMapper objectMapper) {
+
         this.contactMessageRepository = contactMessageRepository;
-        this.mailSender = mailSender;
+        this.objectMapper = objectMapper;
+
+        this.httpClient = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(10))
+                .build();
     }
 
     public ContactMessage saveMessage(ContactRequest request) {
+
         ContactMessage contactMessage = new ContactMessage();
 
         contactMessage.setName(request.getName().trim());
@@ -50,19 +66,22 @@ public class ContactMessageService {
         ContactMessage savedMessage =
                 contactMessageRepository.save(contactMessage);
 
-        if (mailSender == null || recipient.isBlank() || sender.isBlank()) {
+        if (brevoApiKey.isBlank()
+                || senderEmail.isBlank()
+                || recipient.isBlank()) {
+
             log.info(
-                    "Contact message {} saved; email notification is not configured.",
+                    "Contact message {} saved; Brevo email is not configured.",
                     savedMessage.getId());
+
             return savedMessage;
         }
 
         try {
             sendNotification(savedMessage);
-        } catch (MailException | MessagingException
-                 | UnsupportedEncodingException exception) {
+        } catch (Exception exception) {
             log.error(
-                    "Email notification failed for submission ID {}",
+                    "Brevo email notification failed for submission ID {}",
                     savedMessage.getId(),
                     exception);
         }
@@ -71,10 +90,11 @@ public class ContactMessageService {
     }
 
     private void sendNotification(ContactMessage contact)
-            throws MessagingException, UnsupportedEncodingException {
+            throws Exception {
 
         String name = escapeHtml(contact.getName());
         String email = escapeHtml(contact.getEmail());
+
         String message = escapeHtml(contact.getMessage())
                 .replace("\n", "<br>");
 
@@ -128,18 +148,48 @@ public class ContactMessageService {
                 contact.getMessage(),
                 contact.getId());
 
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper helper =
-                new MimeMessageHelper(mimeMessage, true, "UTF-8");
+        Map<String, Object> payload = Map.of(
+                "sender", Map.of(
+                        "name", senderName,
+                        "email", senderEmail),
+                "to", new Object[]{
+                        Map.of("email", recipient)
+                },
+                "replyTo", Map.of(
+                        "email", contact.getEmail(),
+                        "name", contact.getName()),
+                "subject",
+                "New Portfolio Contact — " + contact.getName(),
+                "htmlContent", html,
+                "textContent", plainText
+        );
 
-        helper.setFrom(sender, "ShivaMai Systems");
-        helper.setTo(recipient);
-        helper.setReplyTo(contact.getEmail());
-        helper.setSubject(
-                "New Portfolio Contact — " + contact.getName());
-        helper.setText(plainText, html);
+        String jsonPayload = objectMapper.writeValueAsString(payload);
 
-        mailSender.send(mimeMessage);
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+                .uri(URI.create(BREVO_API_URL))
+                .timeout(Duration.ofSeconds(20))
+                .header("accept", "application/json")
+                .header("api-key", brevoApiKey.trim())
+                .header("content-type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .build();
+
+        HttpResponse<String> response = httpClient.send(
+                httpRequest,
+                HttpResponse.BodyHandlers.ofString());
+
+        if (response.statusCode() < 200 || response.statusCode() >= 300) {
+            throw new IllegalStateException(
+                    "Brevo API returned HTTP status "
+                            + response.statusCode()
+                            + " | Response: "
+                            + response.body());
+        }
+
+        log.info(
+                "Brevo email notification accepted for submission ID {}",
+                contact.getId());
     }
 
     private String escapeHtml(String value) {
