@@ -23,9 +23,6 @@ https://shivamai-portfolio.pages.dev
 ## Backend Health Endpoint
 https://shivamai-portfolio.onrender.com/
 
-## LeetCode Dashboard
-https://shivamai-portfolio.pages.dev/leetcode
-
 ---
 
 # 🔥 Features
