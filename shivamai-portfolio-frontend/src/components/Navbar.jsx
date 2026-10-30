@@ -16,6 +16,7 @@ function Navbar() {
         <NavLink to="/projects">Projects</NavLink>
         <NavLink to="/experience">Experience</NavLink>
         <NavLink to="/skills">Skills</NavLink>
+        <NavLink to="/leetcode">LeetCode</NavLink>
         <NavLink to="/resume">Resume</NavLink>
         <NavLink className="contact-link" to="/contact">
           Contact <span aria-hidden="true">↗</span>

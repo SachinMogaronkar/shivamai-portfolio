@@ -9,6 +9,7 @@ import Experience from './pages/Experience'
 import Skills from './pages/Skills'
 import Contact from './pages/Contact'
 import Resume from './pages/Resume'
+import LeetCode from './pages/LeetCode'
 import './App.css'
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/experience" element={<Experience />} />
         <Route path="/skills" element={<Skills />} />
         <Route path="/resume" element={<Resume />} />
+        <Route path="/leetcode" element={<LeetCode />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
 

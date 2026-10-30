@@ -1,0 +1,408 @@
+
+.leetcode-page {
+  min-height: 80vh;
+  padding: 80px 10%;
+  color: #f5f5f5;
+}
+
+.leetcode-header {
+  margin-bottom: 48px;
+}
+
+.leetcode-header h1 {
+  margin: 0;
+  font-size: clamp(42px, 6vw, 72px);
+  letter-spacing: -3px;
+}
+
+.leetcode-header h1 span {
+  color: #a3a3a3;
+}
+
+.leetcode-header > p:last-child {
+  max-width: 540px;
+  margin-top: 20px;
+  color: #a3a3a3;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.leetcode-dashboard {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 20px;
+}
+
+.leetcode-card {
+  padding: 28px;
+  border: 1px solid #333;
+  background: #111;
+  min-width: 0;
+}
+
+.leetcode-card h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.leetcode-card-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.leetcode-card-heading span {
+  color: #888;
+  font-size: 12px;
+}
+
+/* Solved Problems */
+
+.leetcode-solved-content {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.leetcode-circle {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 150px;
+  aspect-ratio: 1;
+  border: 8px solid #d9a441;
+  border-radius: 50%;
+}
+
+.leetcode-circle div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.leetcode-circle strong {
+  font-size: 38px;
+  font-weight: 600;
+}
+
+.leetcode-circle span {
+  color: #a3a3a3;
+  font-size: 12px;
+}
+
+.leetcode-difficulty-list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.leetcode-difficulty-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 9px;
+  font-size: 13px;
+}
+
+.leetcode-difficulty-info span {
+  color: #a3a3a3;
+}
+
+.leetcode-progress-track {
+  height: 7px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #292929;
+}
+
+.leetcode-progress-fill {
+  height: 100%;
+  border-radius: 20px;
+  transition: width 400ms ease;
+}
+
+/* Global Ranking */
+
+.leetcode-ranking-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+.leetcode-ranking-card > strong {
+  color: #d9a441;
+  font-size: clamp(28px, 3vw, 42px);
+  overflow-wrap: anywhere;
+}
+
+.leetcode-ranking-card > span {
+  color: #888;
+  font-size: 12px;
+}
+
+/* Badges */
+
+.leetcode-badges-card {
+  min-height: 250px;
+}
+
+.leetcode-empty {
+  margin: 0 0 24px;
+  color: #888;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.leetcode-badge-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.leetcode-badge {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.leetcode-badge img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.leetcode-badge div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.leetcode-badge strong {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.leetcode-badge span {
+  color: #888;
+  font-size: 11px;
+}
+
+.leetcode-upcoming {
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid #333;
+}
+
+.leetcode-upcoming h3 {
+  margin: 0 0 16px;
+  color: #d9a441;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.leetcode-upcoming ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.leetcode-upcoming li {
+  padding: 10px;
+  border: 1px solid #292929;
+  color: #aaa;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.leetcode-upcoming p {
+  color: #888;
+  font-size: 12px;
+}
+
+/* Submission Activity */
+
+.leetcode-activity-card {
+  grid-column: 1 / -1;
+  min-height: 220px;
+}
+
+.leetcode-activity-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.leetcode-activity-summary strong {
+  color: #d9a441;
+  font-size: 25px;
+}
+
+.leetcode-activity-summary span {
+  margin-right: 24px;
+  color: #888;
+  font-size: 12px;
+}
+
+.leetcode-heatmap-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.leetcode-month-labels {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  min-width: 620px;
+  margin-bottom: 10px;
+  color: #888;
+  font-size: 11px;
+}
+
+.leetcode-heatmap {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, 11px);
+  grid-auto-columns: 11px;
+  gap: 4px;
+  min-width: max-content;
+}
+
+.leetcode-heatmap-day {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  background: #292929;
+}
+
+.leetcode-heatmap-day.level-1 {
+  background: #66522d;
+}
+
+.leetcode-heatmap-day.level-2 {
+  background: #92702e;
+}
+
+.leetcode-heatmap-day.level-3 {
+  background: #bd9038;
+}
+
+.leetcode-heatmap-day.level-4 {
+  background: #e4b653;
+}
+
+.leetcode-heatmap-legend {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  color: #888;
+  font-size: 11px;
+}
+
+.leetcode-activity-note {
+  margin-top: 16px;
+  color: #777;
+  font-size: 11px;
+}
+
+/* Loading and Error */
+
+.leetcode-status {
+  padding: 32px;
+  border: 1px solid #333;
+  color: #a3a3a3;
+  line-height: 1.8;
+}
+
+.leetcode-status a {
+  display: block;
+  width: fit-content;
+  margin-top: 14px;
+  color: #d9a441;
+  text-decoration: none;
+}
+
+/* Profile Link */
+
+.leetcode-profile-action {
+  margin-top: 32px;
+}
+
+.leetcode-profile-action a {
+  display: inline-block;
+  padding: 14px 20px;
+  border: 1px solid #d9a441;
+  color: #d9a441;
+  font-size: 13px;
+  text-decoration: none;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.leetcode-profile-action a:hover {
+  background: #d9a441;
+  color: #0a0a0a;
+}
+
+/* Responsive */
+
+@media (max-width: 800px) {
+  .leetcode-page {
+    padding: 65px 7%;
+  }
+
+  .leetcode-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .leetcode-activity-card {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .leetcode-page {
+    padding: 50px 6%;
+  }
+
+  .leetcode-header h1 {
+    letter-spacing: -2px;
+  }
+
+  .leetcode-solved-content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 30px;
+  }
+
+  .leetcode-circle {
+    width: 130px;
+    align-self: center;
+  }
+
+  .leetcode-card {
+    padding: 22px;
+  }
+
+  .leetcode-card-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .leetcode-upcoming ul {
+    grid-template-columns: 1fr;
+  }
+
+  .leetcode-activity-summary {
+    flex-wrap: wrap;
+  }
+}
