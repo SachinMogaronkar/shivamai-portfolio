@@ -1,4 +1,5 @@
-
+import resume from '/documents/Sachin_Mogaronkar_Java_Backend_Developer_Resume.pdf'
+import photo from '/documents/Sachin_Passport.png'
 import '../styles/Resume.css'
 
 function Resume() {
@@ -31,7 +32,7 @@ function Resume() {
           <div className="document-actions">
             <a
               className="document-link"
-              href="/documents/Sachin_Mogaronkar_Java_Backend_Developer_Resume.pdf"
+              href={resume}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -40,7 +41,7 @@ function Resume() {
 
             <a
               className="document-link"
-              href="/documents/Sachin_Mogaronkar_Java_Backend_Developer_Resume.pdf"
+              href={resume}
               download="Sachin_Mogaronkar_Java_Backend_Developer_Resume.pdf"
             >
               Download PDF <span aria-hidden="true">↓</span>
@@ -58,7 +59,7 @@ function Resume() {
           <div className="document-actions">
             <a
               className="document-link"
-              href="/documents/Sachin_Passport.png"
+              href={photo}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -67,7 +68,7 @@ function Resume() {
 
             <a
               className="document-link"
-              href="/documents/Sachin_Passport.png"
+              href={photo}
               download="Sachin_Passport.png"
             >
               Download PNG <span aria-hidden="true">↓</span>

@@ -1,4 +1,5 @@
 import signature from '../images/sachin-signature.png'
+import photo from '../images/Sachin_Passport.png'
 import '../styles/About.css'
 
 function About() {
@@ -28,7 +29,7 @@ function About() {
         </div>
         <aside className="about-profile">
           <img
-            src="src/images/Sachin_Passport.png"
+            src={photo}
             alt="Sachin Pooja Rajesh Mogaronkar"
             className="about-profile-photo"
           />
