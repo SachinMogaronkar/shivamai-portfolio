@@ -386,7 +386,7 @@ The portfolio includes a backend-powered contact form.
 Software Developer | Java Backend Engineer
 
 - GitHub: https://github.com/
-- LinkedIn: Add your LinkedIn profile URL
+- LinkedIn: https://linkedin.com/in/sachin-mogaronkar3117
 - Portfolio: https://shivamai-portfolio.pages.dev
 
 ---
